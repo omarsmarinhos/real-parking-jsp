@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e27f68df-c8e0-4cc5-a984-5326cdc29689" name="Changes" comment="First Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/TestRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/TestRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,12 +71,65 @@
       <recent name="com.RealParking.domain" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="test" />
       <recent name="com.RealParking.domain.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TestRole">
+  <component name="RunManager" selected="Application.TestIncident">
+    <configuration name="TestIncident" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test.TestIncident" />
+      <module name="RealParkingJsp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestRole" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="test.TestRole" />
+      <module name="RealParkingJsp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestTicket" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test.TestTicket" />
+      <module name="RealParkingJsp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestUser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test.TestUser" />
+      <module name="RealParkingJsp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestVoucher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test.TestVoucher" />
       <module name="RealParkingJsp" />
       <extension name="coverage">
         <pattern>
@@ -113,6 +168,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestIncident" />
+        <item itemvalue="Application.TestVoucher" />
+        <item itemvalue="Application.TestUser" />
+        <item itemvalue="Application.TestTicket" />
         <item itemvalue="Application.TestRole" />
       </list>
     </recent_temporary>
@@ -136,6 +195,9 @@
       <workItem from="1673032589637" duration="4574000" />
       <workItem from="1673108652392" duration="327000" />
       <workItem from="1673110462882" duration="16000" />
+      <workItem from="1673111216439" duration="613000" />
+      <workItem from="1673123851776" duration="2995000" />
+      <workItem from="1673218760926" duration="2630000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
