@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @WebFilter({"/index.jsp", "/registro/*", "/caja/*" , "/configuracion/*",
-        "/registro/*", "/reportes/*", "/roles/*", "/users/*"})
+        "/registro/*", "/reportes/*", "/roles/*", "/users/*"} )
 public class LoginFilter implements Filter {
 
     @Override
