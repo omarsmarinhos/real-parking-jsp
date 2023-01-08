@@ -1,106 +1,43 @@
-<!-- <%@page contentType="text/html" pageEncoding="UTF-8" %> -->
-<!-- <jsp:include page="layout/header.jsp" /> -->
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>${title}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-          crossorigin="anonymous"></script>
-  <meta>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Real Parking</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page"
-             href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"
-             href="registro.html">Registro</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"
-             href="caja.html">Caja</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"
-             href="reportes.html">Reportes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"
-             href="configuracion.html">Configuración</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"
-             href="usuariosListar.hmtl">Usuarios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"
-             href="rolesListar.html">Roles</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-             aria-expanded="false">
-            ${not empty sessionScope.username ? sessionScope.username : "Cuenta"}
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item"
-                   href="${pageContext.request.contextPath}/${not empty sessionScope.username ? " logout" :
-              "login"}">
-              ${not empty sessionScope.username ? "Logout" : "Login"}
-              </a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="container">
-  <h3>${title}</h3>
-  <form action="" method="post">
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="layout/header.jsp"/>
+<h3>${requestScope.title}</h3>
+<form action="" method="post">
     <div class="row mb-2">
-      <label class="col-form-label col-sm-2" for="rol">Ingresar rol</label>
-      <div class="col-sm-4">
-        <input class="form-control" type="text" name="rol" id="rol"/>
-      </div>
-      <div class="col-sm-2">
-        <input class="btn btn-secondary" type="submit" value="Filtrar">
-      </div>
+        <label class="col-form-label col-sm-2" for="rol">Ingresar rol</label>
+        <div class="col-sm-4">
+            <input class="form-control" type="text" name="rol" id="rol"/>
+        </div>
+        <div class="col-sm-2">
+            <input class="btn btn-secondary" type="submit" value="Filtrar">
+        </div>
+        <div class="col-sm-2">
+            <a class="btn btn-primary" href="">Crear Rol</a>
+        </div>
     </div>
-  </form>
+</form>
 
-  <table class="table table-hover table-striped">
+<table class="table table-hover table-striped">
     <tr>
-      <th>Id</th>
-      <th>Rol</th>
-      <th>Estado</th>
-      <th></th>
-      <th></th>
+        <th>Id</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th></th>
+        <th></th>
     </tr>
-    <!--<c:forEach items="${productos}" var="p">-->
+    <c:forEach items="${requestScope.roles}" var="r">
     <tr>
-      <td>1</td>
-      <td>Administrador</td>
-      <td>Activo</td>
-      <td><a class="btn btn-sm btn-success"
-             href="">Editar</a></td>
-      <td><a class="btn btn-sm btn-danger"
-             href="">Deshabilitar</a></td>
+        <td>${r.idRol}</td>
+        <td>${r.description}</td>
+        <td>${r.state}</td>
+        <td><a class="btn btn-sm btn-success"
+               href="">Editar</a></td>
+        <td><a class="btn btn-sm btn-danger"
+               href="">Deshabilitar</a></td>
     </tr>
-    <!--</c:forEach>-->
-  </table>
+    </c:forEach>
+</table>
 </div>
 </body>
 </html>
-<!-- <jsp:include page="layout/footer.jsp" /> ––>
+<jsp:include page="layout/footer.jsp"/>

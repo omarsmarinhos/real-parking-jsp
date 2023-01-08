@@ -39,7 +39,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                       href="${pageContext.request.contextPath}/usuarios">Usuarios</a>
+                       href="${pageContext.request.contextPath}/users">Usuarios</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
