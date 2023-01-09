@@ -19,7 +19,7 @@ public class Test {
 
 
         IncidentRepositoryImplement incidentRepositoryImplement = new IncidentRepositoryImplement();
-        System.out.println(incidentRepository.listarIncidentes());
+        System.out.println(incidentRepositoryImplement.listarIncidentes());
     }
 
 }
