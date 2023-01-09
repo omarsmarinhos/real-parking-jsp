@@ -6,5 +6,14 @@ import java.util.List;
 
 public interface RoleService {
 
-    List<Role> listar();
+     List<Role> findAllRoles();
+
+     Role findRoleById(Role role);
+
+     void insertRole(Role role);
+
+     void updateRole(Role role);
+
+     void deleteRole(Role role);
+
 }

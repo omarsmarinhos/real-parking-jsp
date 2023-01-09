@@ -5,6 +5,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "rol")
+@NamedQueries({
+        @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
+})
 public class Role implements Serializable {
 
     private static final long serialVersionUID=1L;
