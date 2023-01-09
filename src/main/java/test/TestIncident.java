@@ -1,7 +1,6 @@
 package test;
 
 import com.RealParking.persitence.entity.Incident;
-import com.RealParking.persitence.entity.Role;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -1,4 +1,4 @@
-package com.RealParking.domain.service;
+package com.RealParking.persitence.service;
 
 import com.RealParking.persitence.entity.Voucher;
 

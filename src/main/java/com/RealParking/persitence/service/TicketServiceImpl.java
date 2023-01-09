@@ -1,15 +1,21 @@
-package com.RealParking.domain.service;
+package com.RealParking.persitence.service;
 
 import com.RealParking.persitence.entity.Ticket;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public class TicketServiceTestImpl implements TicketService{
+public class TicketServiceImpl implements TicketService{
 
-    @PersistenceContext(unitName="RealParkingPersistence")
-    EntityManager em;
+    private EntityManagerFactory emf;
+    private EntityManager em;
+
+    public TicketServiceImpl() {
+        emf = Persistence.createEntityManagerFactory("RealParkingPersistence");
+        em = emf.createEntityManager();
+    }
 
     @Override
     public List<Ticket> findAllTickets() {

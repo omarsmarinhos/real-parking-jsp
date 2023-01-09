@@ -1,27 +1,21 @@
-package com.RealParking.domain.service;
+package com.RealParking.persitence.service;
 
 import com.RealParking.persitence.entity.Incident;
-import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public class IncidentServiceTestImpl implements IncidentService{
+public class IncidentServiceImpl implements IncidentService{
 
-    /*private EntityManagerFactory emf;
+    private EntityManagerFactory emf;
     private EntityManager em;
 
-    public IncidentServiceTestImpl() {
+    public IncidentServiceImpl() {
         emf = Persistence.createEntityManagerFactory("RealParkingPersistence");
         em = emf.createEntityManager();
-    }*/
-
-    @PersistenceContext(unitName="RealParkingPersistence")
-    EntityManager em;
-
+    }
 
     @Override
     public List<Incident> findAllIncidents() {
