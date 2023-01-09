@@ -1,7 +1,7 @@
 package com.RealParking.controller;
 
-import com.RealParking.domain.service.LoginService;
-import com.RealParking.domain.service.LoginServiceImpl;
+import com.RealParking.persitence.service.LoginService;
+import com.RealParking.persitence.service.LoginServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

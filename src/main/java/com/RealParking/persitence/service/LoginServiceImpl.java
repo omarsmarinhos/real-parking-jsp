@@ -1,4 +1,4 @@
-package com.RealParking.domain.service;
+package com.RealParking.persitence.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

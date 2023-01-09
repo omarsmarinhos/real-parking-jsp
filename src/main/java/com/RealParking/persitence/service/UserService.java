@@ -1,4 +1,4 @@
-package com.RealParking.domain.service;
+package com.RealParking.persitence.service;
 
 import com.RealParking.persitence.entity.User;
 
@@ -9,6 +9,8 @@ public interface UserService {
      List<User> findAllUsers();
 
      User findUserById(User user);
+
+     User findUserByUser(User user);
 
      void insertUser(User user);
 

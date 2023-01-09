@@ -1,6 +1,5 @@
 package test;
 
-import com.RealParking.persitence.entity.User;
 import com.RealParking.persitence.entity.Voucher;
 
 import javax.persistence.EntityManager;
