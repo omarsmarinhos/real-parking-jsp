@@ -1,15 +1,22 @@
 package com.RealParking.domain.service;
 
 import com.RealParking.persitence.entity.Role;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceContext;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 public class RoleServiceTestImpl implements RoleService{
 
-    @PersistenceContext(unitName="RealParkingPersistence")
-    EntityManager em;
+    private EntityManagerFactory emf;
+    private EntityManager em;
+
+    public RoleServiceTestImpl() {
+        emf = Persistence.createEntityManagerFactory("RealParkingPersistence");
+        em = emf.createEntityManager();
+    }
 
     @Override
     public List<Role> findAllRoles() {
