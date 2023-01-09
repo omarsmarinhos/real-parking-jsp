@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comprobante")
+@NamedQueries({
+        @NamedQuery(name = "Voucher.findAll", query = "SELECT v FROM Voucher v")
+})
 public class Voucher implements Serializable {
     public static long serialVersionUID=1L;
 

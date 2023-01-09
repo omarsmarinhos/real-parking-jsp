@@ -7,6 +7,9 @@ import java.util.Arrays;
 
 @Entity
 @Table(name = "usuarios")
+@NamedQueries({
+        @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+})
 public class User implements Serializable {
 
     public static final long serialVersionUID=1L;

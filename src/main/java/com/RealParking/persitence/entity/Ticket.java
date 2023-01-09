@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ticket")
+@NamedQueries({
+        @NamedQuery(name = "Ticket.findAll", query = "SELECT t FROM Ticket t")
+})
 public class Ticket implements Serializable {
 
     private static final long serialVersionUID=1L;
