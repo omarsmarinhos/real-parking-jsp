@@ -1,6 +1,6 @@
 package com.RealParking.persitence.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity

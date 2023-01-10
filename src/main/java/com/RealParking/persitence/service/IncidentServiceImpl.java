@@ -1,9 +1,9 @@
 package com.RealParking.persitence.service;
 
 import com.RealParking.persitence.entity.Incident;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import java.util.List;
 
@@ -29,16 +29,22 @@ public class IncidentServiceImpl implements IncidentService{
 
     @Override
     public void insertIncident(Incident incident) {
+        em.getTransaction().begin();
         em.persist(incident);
+        em.getTransaction().commit();
     }
 
     @Override
     public void updateIncident(Incident incident) {
+        em.getTransaction().begin();
         em.merge(incident);
+        em.getTransaction().commit();
     }
 
     @Override
     public void deleteIncident(Incident incident) {
+        em.getTransaction().begin();
         em.remove(em.merge(incident));
+        em.getTransaction().commit();
     }
 }
