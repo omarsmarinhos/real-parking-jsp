@@ -19,14 +19,16 @@ public class RoleAgregarServlet extends HttpServlet {
         String role = req.getParameter("rol");
         String estado = req.getParameter("estado");
 
-        Role rol = new Role();
-        rol.setDescription(role);
-        rol.setState(estado);
+        if (role.isBlank() || estado.isBlank()) {
+            resp.sendRedirect(req.getContextPath() + "/roles");
+        } else {
+            Role rol = new Role();
+            rol.setDescription(role);
+            rol.setState(estado);
 
-        RoleService service = new RoleServiceImpl();
-        service.insertRole(rol);
-
-        resp.sendRedirect(req.getContextPath() + "/roles");
-
+            RoleService service = new RoleServiceImpl();
+            service.insertRole(rol);
+            resp.sendRedirect(req.getContextPath() + "/roles");
+        }
     }
 }
