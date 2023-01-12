@@ -2,7 +2,6 @@ package com.RealParking.controller;
 
 import com.RealParking.persitence.service.LoginService;
 import com.RealParking.persitence.service.LoginServiceImpl;
-import com.RealParking.persitence.service.RoleServicePruebaImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,7 +16,7 @@ import java.util.Optional;
 public class LoginServlet extends HttpServlet  {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LoginService service = new LoginServiceImpl();
+       /* LoginService service = new LoginServiceImpl();
         Optional<String> usernameOptional = service.getUsername(req);
         if (usernameOptional.isPresent()) {
             req.setAttribute("title", "Bienvenido");
@@ -25,7 +24,7 @@ public class LoginServlet extends HttpServlet  {
         } else {
             req.setAttribute("title", "Login");
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
-        }
+        }*/
     }
 
     @Override
