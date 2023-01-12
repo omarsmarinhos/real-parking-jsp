@@ -21,10 +21,6 @@ public class LoginServlet extends HttpServlet  {
         Optional<String> usernameOptional = service.getUsername(req);
         if (usernameOptional.isPresent()) {
             req.setAttribute("title", "Bienvenido");
-            //ELiminar en un futuro
-            HttpSession session = req.getSession();
-            session.setAttribute("roles", new RoleServicePruebaImpl());
-            //.------..-.
             getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
         } else {
             req.setAttribute("title", "Login");

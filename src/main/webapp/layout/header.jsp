@@ -7,7 +7,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Real Parking</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -44,7 +44,7 @@
                     <a class="nav-link"
                        href="${pageContext.request.contextPath}/roles">Roles</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" >
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         ${not empty sessionScope.username ? sessionScope.username : "Cuenta"}

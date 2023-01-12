@@ -29,16 +29,22 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public void insertRole(Role role) {
+        em.getTransaction().begin();
         em.persist(role);
+        em.getTransaction().commit();
     }
 
     @Override
     public void updateRole(Role role) {
+        em.getTransaction().begin();
         em.merge(role);
+        em.getTransaction().commit();
     }
 
     @Override
     public void deleteRole(Role role) {
+        em.getTransaction().begin();
         em.remove(em.merge(role));
+        em.getTransaction().commit();
     }
 }

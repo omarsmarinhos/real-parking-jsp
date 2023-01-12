@@ -1,6 +1,8 @@
 package com.RealParking.controller;
 
 import com.RealParking.persitence.entity.Role;
+import com.RealParking.persitence.service.RoleService;
+import com.RealParking.persitence.service.RoleServiceImpl;
 import com.RealParking.persitence.service.RoleServicePruebaImpl;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -18,6 +20,8 @@ public class RoleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RoleService service = new RoleServiceImpl();
+        req.setAttribute("roles", service.findAllRoles());
         req.setAttribute("title", "Listado de Roles");
         getServletContext().getRequestDispatcher("/roles.jsp").forward(req, resp);
     }
