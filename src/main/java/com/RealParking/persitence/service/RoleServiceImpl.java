@@ -28,6 +28,13 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
+    public List<Role> findRoleByRole(String role) {
+        String jpql = "SELECT r FROM Role r WHERE r.description LIKE '%" + role.toUpperCase() + "%'";
+        List<Role> roles = em.createQuery(jpql, Role.class).getResultList();
+        return roles;
+    }
+
+    @Override
     public void insertRole(Role role) {
         em.getTransaction().begin();
         em.persist(role);

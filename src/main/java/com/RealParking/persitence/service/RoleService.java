@@ -10,6 +10,8 @@ public interface RoleService {
 
      Role findRoleById(Role role);
 
+     List<Role> findRoleByRole(String role);
+
      void insertRole(Role role);
 
      void updateRole(Role role);

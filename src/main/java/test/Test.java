@@ -2,6 +2,7 @@ package test;
 
 
 import com.RealParking.persitence.entity.Incident;
+import com.RealParking.persitence.entity.Role;
 import com.RealParking.persitence.entity.Ticket;
 import com.RealParking.persitence.entity.User;
 import com.RealParking.persitence.service.*;
@@ -13,9 +14,12 @@ public class Test {
 
     public static void main(String[] args) {
 
-        IncidentService incidentService = new IncidentServiceImpl();
+        //IncidentService incidentService = new IncidentServiceImpl();
         RoleService roleService = new RoleServiceImpl();
-        TicketService ticketService = new TicketServiceImpl();
+
+
+        System.out.println(roleService.findRoleByRole("a"));
+        /*TicketService ticketService = new TicketServiceImpl();
         UserService userService = new UserServiceImpl();
         VoucherService voucherService = new VoucherServiceImpl();
 
@@ -23,7 +27,7 @@ public class Test {
         System.out.println(roleService.findAllRoles());
         System.out.println(ticketService.findAllTickets());
         System.out.println(userService.findAllUsers());
-        System.out.println(voucherService.findAllVouchers());
+        System.out.println(voucherService.findAllVouchers());*/
 
     }
 
