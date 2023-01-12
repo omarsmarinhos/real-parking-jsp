@@ -1,7 +1,6 @@
 package com.RealParking.controller;
 
 import com.RealParking.persitence.entity.Role;
-import com.RealParking.persitence.service.RoleServicePruebaImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,10 +23,10 @@ public class RoleAgregarServlet extends HttpServlet {
         rol.setState(estado);
 
         HttpSession session = req.getSession();
-        RoleServicePruebaImpl roles = (RoleServicePruebaImpl) session.getAttribute("roles");
+        /*RoleServicePruebaImpl roles = (RoleServicePruebaImpl) session.getAttribute("roles");
         roles.insertRole(rol);
 
-        getServletContext().getRequestDispatcher("/roles").forward(req, resp);
+        getServletContext().getRequestDispatcher("/roles").forward(req, resp);*/
 
     }
 }
