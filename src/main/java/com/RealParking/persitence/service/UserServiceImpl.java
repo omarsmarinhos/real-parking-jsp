@@ -1,9 +1,9 @@
 package com.RealParking.persitence.service;
 
 import com.RealParking.persitence.entity.User;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import java.util.List;
 
@@ -35,16 +35,22 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void insertUser(User user) {
+        em.getTransaction().begin();
         em.persist(user);
+        em.getTransaction().commit();
     }
 
     @Override
     public void updateUser(User user) {
+        em.getTransaction().begin();
         em.merge(user);
+        em.getTransaction().commit();
     }
 
     @Override
     public void deleteUser(User user) {
+        em.getTransaction().begin();
         em.remove(em.merge(user));
+        em.getTransaction().commit();
     }
 }

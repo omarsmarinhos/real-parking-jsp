@@ -1,9 +1,9 @@
 package com.RealParking.persitence.service;
 
 import com.RealParking.persitence.entity.Voucher;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import java.util.List;
 
@@ -29,16 +29,22 @@ public class VoucherServiceImpl implements VoucherService{
 
     @Override
     public void insertVoucher(Voucher voucher) {
+        em.getTransaction().begin();
         em.persist(voucher);
+        em.getTransaction().commit();
     }
 
     @Override
     public void updateVoucher(Voucher voucher) {
+        em.getTransaction().begin();
         em.merge(voucher);
+        em.getTransaction().commit();
     }
 
     @Override
     public void deleteVoucher(Voucher voucher) {
+        em.getTransaction().begin();
         em.remove(em.merge(voucher));
+        em.getTransaction().commit();
     }
 }
