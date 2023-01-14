@@ -8,6 +8,8 @@ public interface UserService {
 
      List<User> findAllUsers();
 
+     List<User> findAllUserByUser(String filter);
+
      User findUserById(User user);
 
      User findUserByUser(User user);

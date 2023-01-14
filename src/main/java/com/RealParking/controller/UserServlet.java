@@ -27,7 +27,7 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService service = new UserServiceImpl();
         String dni = req.getParameter("filtro_dni");
-        req.setAttribute("users", service.findAllUsers());
+        req.setAttribute("users", service.findAllUserByUser(dni));
         req.setAttribute("title", "Listado de Usuarios");
         getServletContext().getRequestDispatcher("/users.jsp").forward(req, resp);
     }

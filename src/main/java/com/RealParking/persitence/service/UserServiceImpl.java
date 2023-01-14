@@ -1,5 +1,6 @@
 package com.RealParking.persitence.service;
 
+import com.RealParking.persitence.entity.Role;
 import com.RealParking.persitence.entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,6 +21,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> findAllUsers() {
         return em.createNamedQuery("User.findAll").getResultList();
+    }
+
+    @Override
+    public List<User> findAllUserByUser(String filter) {
+        String jpql = "SELECT u FROM User u WHERE u.username LIKE '%" + filter.toUpperCase() + "%'";
+        return em.createQuery(jpql, User.class).getResultList();
     }
 
     @Override
