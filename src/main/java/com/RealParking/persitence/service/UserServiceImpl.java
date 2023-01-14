@@ -1,6 +1,5 @@
 package com.RealParking.persitence.service;
 
-import com.RealParking.persitence.entity.Role;
 import com.RealParking.persitence.entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -16,7 +16,7 @@ public class Test {
 
         UserService service = new UserServiceImpl();
         User user = new User();
-        user.setIdUser(1);
+        //user.setIdUser(1);
         user.setUsername("71397835");
         System.out.println(service.findUserByUser(user));
 
