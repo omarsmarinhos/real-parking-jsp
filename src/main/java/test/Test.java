@@ -14,20 +14,12 @@ public class Test {
 
     public static void main(String[] args) {
 
-        //IncidentService incidentService = new IncidentServiceImpl();
-        RoleService roleService = new RoleServiceImpl();
+        UserService service = new UserServiceImpl();
+        User user = new User();
+        user.setIdUser(1);
+        user.setUsername("71397835");
+        System.out.println(service.findUserByUser(user));
 
-
-        System.out.println(roleService.findRoleByRole("a"));
-        /*TicketService ticketService = new TicketServiceImpl();
-        UserService userService = new UserServiceImpl();
-        VoucherService voucherService = new VoucherServiceImpl();
-
-        System.out.println(incidentService.findAllIncidents());
-        System.out.println(roleService.findAllRoles());
-        System.out.println(ticketService.findAllTickets());
-        System.out.println(userService.findAllUsers());
-        System.out.println(voucherService.findAllVouchers());*/
 
     }
 

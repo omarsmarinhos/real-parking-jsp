@@ -1,5 +1,6 @@
 package com.RealParking.persitence.service;
 
+import com.RealParking.persitence.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -15,5 +16,14 @@ public class LoginServiceImpl implements LoginService{
             return Optional.of(username);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> login(String username, String password) {
+        UserService userService = new UserServiceImpl();
+        User user = new User();
+        user.setUsername(username);
+        return Optional.ofNullable(userService.findUserByUser(user))
+                .filter(u -> u.getPassword().equals(password) && u.getState().equals("Activo"));
     }
 }

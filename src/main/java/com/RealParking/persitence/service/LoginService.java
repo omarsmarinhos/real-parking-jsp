@@ -1,5 +1,6 @@
 package com.RealParking.persitence.service;
 
+import com.RealParking.persitence.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.Optional;
@@ -7,4 +8,5 @@ import java.util.Optional;
 public interface LoginService {
 
     Optional<String> getUsername(HttpServletRequest req);
+    Optional<User> login(String username, String password);
 }

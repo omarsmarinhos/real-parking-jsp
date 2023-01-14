@@ -39,8 +39,10 @@
                         data-bs-toggle="modal" data-bs-target="#exampleModalEditar">Editar
                 </button>
             </td>
-            <td><a class="btn btn-sm btn-danger"
-                   href="${pageContext.request.contextPath}/roles/deshabilitar?id=${r.idRol}">Deshabilitar</a></td>
+            <td><a class="btn btn-sm btn-${r.state.equals("Activo") ? "danger" : "outline-danger"}"
+                   href="${pageContext.request.contextPath}/roles/deshabilitar?id=${r.idRol}">
+                ${r.state.equals("Activo") ? "Deshabilitar" : "Habilitar&nbsp;&nbsp;&nbsp;&nbsp;"}
+            </a></td>
         </tr>
     </c:forEach>
 </table>
