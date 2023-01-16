@@ -4,6 +4,7 @@ import com.RealParking.persitence.entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import java.util.List;
 
@@ -35,7 +36,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findUserByUser(User user) {
-        return em.find(User.class, user.getUsername());
+        //Chamo encontré una solución, pero lo malo es que lanza una excepción si no encuentra nada
+        Query query = em.createQuery("select u from User u where u.username = ?1", User.class);
+        query.setParameter(1, user.getUsername());
+        return (User) query.getSingleResult();
     }
 
     @Override

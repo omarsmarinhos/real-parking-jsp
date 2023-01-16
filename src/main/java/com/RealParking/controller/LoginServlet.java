@@ -36,13 +36,18 @@ public class LoginServlet extends HttpServlet  {
         String password = req.getParameter("password");
 
         LoginService loginService = new LoginServiceImpl();
-        Optional<User> userOptional = loginService.login(username, password);
-        if (userOptional.isPresent()) {
-            HttpSession session = req.getSession();
-            session.setAttribute("username", username);
-            req.setAttribute("title", "Bienvenido");
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
-        } else {
+        try {
+            Optional<User> userOptional = loginService.login(username, password);
+            if (userOptional.isPresent()) {
+                HttpSession session = req.getSession();
+                session.setAttribute("username", username);
+                req.setAttribute("title", "Bienvenido");
+                resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            } else {
+                req.setAttribute("title", "Login");
+                getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+            }
+        } catch (Exception e) {
             req.setAttribute("title", "Login");
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
         }
