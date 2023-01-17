@@ -44,8 +44,10 @@
                         data-bs-toggle="modal" data-bs-target="#userEditar">Editar
                 </button>
             </td>
-            <td><a class="btn btn-sm btn-danger"
-                   href="">Deshabilitar</a></td>
+            <td><a class="btn btn-sm btn-${u.state.equals("Activo") ? "danger" : "outline-danger"}"
+                   href="${pageContext.request.contextPath}/users/deshabilitar?id=${u.idUser}">
+                    ${u.state.equals("Activo") ? "Deshabilitar" : "Habilitar&nbsp;&nbsp;&nbsp;&nbsp;"}
+            </a></td>
         </tr>
     </c:forEach>
 </table>
