@@ -40,15 +40,12 @@ public class LoginServlet extends HttpServlet  {
             Optional<User> userOptional = loginService.login(username, password);
             if (userOptional.isPresent()) {
                 HttpSession session = req.getSession();
-                session.setAttribute("username", username);
-                req.setAttribute("title", "Bienvenido");
+                session.setAttribute("username", userOptional.get().getFullName());
                 resp.sendRedirect(req.getContextPath() + "/index.jsp");
             } else {
-                req.setAttribute("title", "Login");
                 getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
             }
         } catch (Exception e) {
-            req.setAttribute("title", "Login");
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
         }
     }

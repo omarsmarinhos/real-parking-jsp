@@ -1,5 +1,6 @@
 package com.RealParking.controller;
 
+import com.RealParking.persitence.entity.Role;
 import com.RealParking.persitence.service.RoleService;
 import com.RealParking.persitence.service.RoleServiceImpl;
 import com.RealParking.persitence.service.UserService;
@@ -17,17 +18,21 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService service = new UserServiceImpl();
-        req.setAttribute("users", service.findAllUsers());
+        UserService userService = new UserServiceImpl();
+        RoleService roleService = new RoleServiceImpl();
+        req.setAttribute("users", userService.findAllUsers());
+        req.setAttribute("roles", roleService.findAllRoles());
         req.setAttribute("title", "Listado de Usuarios");
         getServletContext().getRequestDispatcher("/users.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService service = new UserServiceImpl();
+        UserService userService = new UserServiceImpl();
+        RoleService roleService = new RoleServiceImpl();
         String dni = req.getParameter("filtro_dni");
-        req.setAttribute("users", service.findAllUserByUser(dni));
+        req.setAttribute("users", userService.findAllUserByUser(dni));
+        req.setAttribute("roles", roleService.findAllRoles());
         req.setAttribute("title", "Listado de Usuarios");
         getServletContext().getRequestDispatcher("/users.jsp").forward(req, resp);
     }

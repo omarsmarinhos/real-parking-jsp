@@ -126,16 +126,12 @@
         let rolInput = document.getElementById('role');
         rolInput.value = "" + rol;
 
-        let index
-        if (estado === "Activo") {
-            index = 1
-        } else if (estado === "Inactivo"){
-            index = 2
-        } else {
-            index = 0
-        }
-        let select = document.querySelector('#estadoe');
-        select.options[index].selected = true;
+        const estadoSelect = document.getElementById('estadoe')
+        const estadoOptions = estadoSelect.options
+        let estadoIndex = Array.prototype.findIndex.call(estadoOptions, function(option) {
+            return option.text === estado;
+        });
+        estadoOptions[estadoIndex].selected = true
     }
 
 </script>
