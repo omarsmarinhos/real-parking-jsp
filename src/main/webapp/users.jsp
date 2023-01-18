@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="layout/header.jsp"/>
-<h3>${requestScope.title}</h3>
+<h3 class="my-4">${requestScope.title}</h3>
 
 <form action="${pageContext.request.contextPath}/users" method="post">
     <div class="row mb-2">
