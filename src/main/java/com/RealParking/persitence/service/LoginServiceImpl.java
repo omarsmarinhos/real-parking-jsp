@@ -11,9 +11,9 @@ public class LoginServiceImpl implements LoginService{
     @Override
     public Optional<String> getUsername(HttpServletRequest req) {
         HttpSession session = req.getSession();
-        String username = (String) session.getAttribute("username");
-        if (username != null) {
-            return Optional.of(username);
+        User user = (User) session.getAttribute("username");
+        if (user != null) {
+            return Optional.ofNullable(user.getFullName());
         }
         return Optional.empty();
     }

@@ -18,7 +18,7 @@
     <div class="login-content">
         <form action="${pageContext.request.contextPath}/login" method="post">
             <img src="images/avatar.svg">
-            <h2 class="title">Welcome tot Real Parking</h2>
+            <h2 class="title">Welcome to Real Parking</h2>
             <div class="input-div one">
                 <div class="i">
                     <i class="fas fa-user"></i>

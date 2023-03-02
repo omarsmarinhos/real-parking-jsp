@@ -3,7 +3,7 @@
 <jsp:include page="layout/header.jsp"/>
 <h3 class="my-4">${requestScope.title}</h3>
 
-<form action="${pageContext.request.contextPath}/users" method="post">
+<form action="${pageContext.request.contextPath}/usuarios" method="post">
     <div class="row mb-2">
         <label class="col-form-label col-sm-2" for="filtro_dni">Ingresar DNI</label>
         <div class="col-sm-4">
@@ -45,7 +45,7 @@
                 </button>
             </td>
             <td><a class="btn btn-sm btn-${u.state.equals("Activo") ? "danger" : "outline-danger"}"
-                   href="${pageContext.request.contextPath}/users/deshabilitar?id=${u.idUser}">
+                   href="${pageContext.request.contextPath}/usuarios/deshabilitar?id=${u.idUser}">
                     ${u.state.equals("Activo") ? "Deshabilitar" : "Habilitar&nbsp;&nbsp;&nbsp;&nbsp;"}
             </a></td>
         </tr>
@@ -59,7 +59,7 @@
                 <h5 class="modal-title" id="example">Agregar Usuario</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="${pageContext.request.contextPath}/users/agregar" method="post">
+            <form action="${pageContext.request.contextPath}/usuarios/agregar" method="post">
                 <div class="modal-body">
                     <div class="row mb-2">
                         <label class="col-form-label col-sm-2" for="dni">DNI</label>
@@ -117,7 +117,7 @@
                 <h5 class="modal-title" id="examplee">Editar Usuario</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="${pageContext.request.contextPath}/users/editar" method="post">
+            <form action="${pageContext.request.contextPath}/usuarios/editar" method="post">
                 <div class="modal-body">
                     <div class="row mb-2">
                         <label class="col-form-label col-sm-2" for="dnie">DNI</label>

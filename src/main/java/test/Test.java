@@ -8,17 +8,22 @@ import com.RealParking.persitence.entity.User;
 import com.RealParking.persitence.service.*;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 
 public class Test {
 
     public static void main(String[] args) {
 
-        UserService service = new UserServiceImpl();
-        User user = new User();
-        //user.setIdUser(1);
-        user.setUsername("123");
-        System.out.println(service.findUserByUser(user));
+        MenuService service = new MenuServiceImpl();
+        String rol = "Cajero";
+        String url = "http://localhost:8080/RealParkingJsp/usuarios";
+        List<String> menus = Arrays.asList("Caja", "Reportes");
+
+        Optional<String> menuActual = menus.stream()
+                .filter(m -> url.contains(m.toLowerCase())).findAny();
 
 
     }

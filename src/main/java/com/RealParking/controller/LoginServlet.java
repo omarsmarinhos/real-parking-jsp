@@ -1,10 +1,7 @@
 package com.RealParking.controller;
 
 import com.RealParking.persitence.entity.User;
-import com.RealParking.persitence.service.LoginService;
-import com.RealParking.persitence.service.LoginServiceImpl;
-import com.RealParking.persitence.service.UserService;
-import com.RealParking.persitence.service.UserServiceImpl;
+import com.RealParking.persitence.service.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet  {
@@ -22,6 +20,7 @@ public class LoginServlet extends HttpServlet  {
         LoginService service = new LoginServiceImpl();
         Optional<String> usernameOptional = service.getUsername(req);
         if (usernameOptional.isPresent()) {
+            HttpSession session = req.getSession();
             req.setAttribute("title", "Bienvenido");
             getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
         } else {
@@ -40,8 +39,11 @@ public class LoginServlet extends HttpServlet  {
             Optional<User> userOptional = loginService.login(username, password);
             if (userOptional.isPresent()) {
                 HttpSession session = req.getSession();
-                session.setAttribute("username", userOptional.get().getFullName());
-                resp.sendRedirect(req.getContextPath() + "/index.jsp");
+                session.setAttribute("username", userOptional.get());
+                MenuService menuService = new MenuServiceImpl();
+                session.setAttribute("menus", menuService.findAllMenus(userOptional.get().getRole().getDescription()));
+                //getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+                resp.sendRedirect(req.getContextPath());
             } else {
                 getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
             }

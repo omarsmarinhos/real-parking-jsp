@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/users/deshabilitar")
+@WebServlet("/usuarios/deshabilitar")
 public class UserDeshabilitarServlet extends HttpServlet {
 
     @Override
@@ -26,7 +26,7 @@ public class UserDeshabilitarServlet extends HttpServlet {
             user = new User();
             user.setIdUser(id);
         } catch (NumberFormatException e) {
-            resp.sendRedirect(req.getContextPath() + "/users");
+            resp.sendRedirect(req.getContextPath() + "/usuarios");
         }
 
         UserService userService = new UserServiceImpl();
@@ -37,6 +37,6 @@ public class UserDeshabilitarServlet extends HttpServlet {
             user.setState("Activo");
         }
         userService.updateUser(user);
-        resp.sendRedirect(req.getContextPath() + "/users");
+        resp.sendRedirect(req.getContextPath() + "/usuarios");
     }
 }

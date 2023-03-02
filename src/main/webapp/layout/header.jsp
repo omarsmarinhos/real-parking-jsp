@@ -1,4 +1,5 @@
-<html>
+<html><%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <head>
     <title>${title}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -20,34 +21,17 @@
                     <a class="nav-link active" aria-current="page"
                        href="${pageContext.request.contextPath}/index.jsp">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="${pageContext.request.contextPath}/registro">Registro</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="${pageContext.request.contextPath}/caja">Caja</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="${pageContext.request.contextPath}/reportes">Reportes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="${pageContext.request.contextPath}/configuracion">Configuracion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="${pageContext.request.contextPath}/users">Usuarios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="${pageContext.request.contextPath}/roles">Roles</a>
-                </li>
+                <c:forEach items="${sessionScope.menus}" var="m">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="${pageContext.request.contextPath}/${m.toLowerCase()}">${m}</a>
+                    </li>
+                </c:forEach>
+
                 <li class="nav-item dropdown" >
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        ${not empty sessionScope.username ? sessionScope.username : "Cuenta"}
+                        ${not empty sessionScope.username ? sessionScope.username.fullName : "Cuenta"}
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item"

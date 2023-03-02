@@ -10,14 +10,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebFilter({"/index.jsp", "/registro/*", "/caja/*" , "/configuracion/*",
-        "/registro/*", "/reportes/*", "/roles/*", "/users/*"} )
+@WebFilter({"/index.jsp", "/registro/*", "/caja/*", "/configuracion/*",
+        "/reportes/*", "/roles/*", "/usuarios/*"})
 public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
-        LoginService service = new LoginServiceImpl();
-        Optional<String> username = service.getUsername((HttpServletRequest) req);
+        LoginService loginService = new LoginServiceImpl();
+        Optional<String> username = loginService.getUsername((HttpServletRequest) req);
         if (username.isPresent()) {
             filterChain.doFilter(req, resp);
         } else {

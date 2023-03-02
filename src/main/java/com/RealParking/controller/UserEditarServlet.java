@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/users/editar")
+@WebServlet("/usuarios/editar")
 public class UserEditarServlet extends HttpServlet {
 
     @Override
@@ -25,7 +25,7 @@ public class UserEditarServlet extends HttpServlet {
         String password = req.getParameter("passworde");
 
         if (dni.isBlank() || nombre.isBlank() || idRol == 0 || estado.isBlank() || password.isBlank()) {
-            resp.sendRedirect(req.getContextPath() + "/users");
+            resp.sendRedirect(req.getContextPath() + "/usuarios");
         } else {
             User user = new User();
             Role role = new Role();
@@ -38,7 +38,7 @@ public class UserEditarServlet extends HttpServlet {
             user.setPassword(password);
             UserService userService = new UserServiceImpl();
             userService.updateUser(user);
-            resp.sendRedirect(req.getContextPath() + "/users");
+            resp.sendRedirect(req.getContextPath() + "/usuarios");
         }
     }
 }
