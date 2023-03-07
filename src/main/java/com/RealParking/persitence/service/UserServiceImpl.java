@@ -1,10 +1,8 @@
 package com.RealParking.persitence.service;
 
 import com.RealParking.persitence.entity.User;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+
+import javax.persistence.*;
 
 import java.util.List;
 
@@ -19,8 +17,41 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<User> findAllUsers() {
-        return em.createNamedQuery("User.findAll").getResultList();
+    public List<User> findAllUsers(int start, int regPorPag, String username, String fullName, String description, String state) {
+        TypedQuery<User> query = em.createQuery(
+                "SELECT u FROM User u " +
+                        "INNER JOIN u.role r " +
+                        "WHERE " +
+                        "u.username LIKE :usuario AND " +
+                        "u.fullName LIKE :nombreCompleto AND " +
+                        "r.description LIKE :descripcionRol AND " +
+                        "u.state LIKE :estado " +
+                        "ORDER BY u.idUser", User.class);
+        query.setFirstResult(start);
+        query.setMaxResults(regPorPag);
+        query.setParameter("usuario", "%" + username + "%");
+        query.setParameter("nombreCompleto", "%" + fullName + "%");
+        query.setParameter("descripcionRol", "%" + description + "%");
+        query.setParameter("estado", state + "%");
+        return query.getResultList();
+    }
+
+    @Override
+    public Long getNumDeRegistros(String username, String fullName, String description, String state) {
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT count(u) FROM User u " +
+                        "INNER JOIN u.role r " +
+                        "WHERE " +
+                        "u.username LIKE :usuario AND " +
+                        "u.fullName LIKE :nombreCompleto AND " +
+                        "r.description LIKE :descripcionRol AND " +
+                        "u.state LIKE :estado " +
+                        "ORDER BY u.idUser", Long.class);
+        query.setParameter("usuario", "%" + username + "%");
+        query.setParameter("nombreCompleto", "%" + fullName + "%");
+        query.setParameter("descripcionRol", "%" + description + "%");
+        query.setParameter("estado", state + "%");
+        return query.getSingleResult();
     }
 
     @Override

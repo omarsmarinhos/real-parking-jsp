@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface UserService {
 
-     List<User> findAllUsers();
+     List<User> findAllUsers(int start, int regPorPag, String username, String fullName, String description, String state);
+
+     Long getNumDeRegistros(String username, String fullName, String description, String state);
 
      List<User> findAllUserByUser(String filter);
 

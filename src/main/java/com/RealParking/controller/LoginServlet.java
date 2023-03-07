@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet  {
                 MenuService menuService = new MenuServiceImpl();
                 session.setAttribute("menus", menuService.findAllMenus(userOptional.get().getRole().getDescription()));
                 //getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
-                resp.sendRedirect(req.getContextPath());
+                resp.sendRedirect(req.getContextPath() + "/users.jsp");
             } else {
                 getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
             }

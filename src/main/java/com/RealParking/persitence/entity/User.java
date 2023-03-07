@@ -6,9 +6,6 @@ import java.sql.Blob;
 
 @Entity
 @Table(name = "usuarios")
-@NamedQueries({
-        @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
-})
 public class User implements Serializable {
 
     public static final long serialVersionUID=1L;
@@ -35,29 +32,25 @@ public class User implements Serializable {
     @JoinColumn(name = "id_rol")
     private Role role;
 
-    @Column(name = "foto")
-    private Blob photo;
 
     public User() {
     }
 
-    public User(Integer idUser, String username, String password, String fullName, String state, Role role, Blob photo) {
+    public User(Integer idUser, String username, String password, String fullName, String state, Role role) {
         this.idUser = idUser;
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.state = state;
         this.role = role;
-        this.photo = photo;
     }
 
-    public User(String username, String password, String fullName, String state, Role role, Blob photo) {
+    public User(String username, String password, String fullName, String state, Role role) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.state = state;
         this.role = role;
-        this.photo = photo;
     }
 
     public Integer getIdUser() {
@@ -108,13 +101,7 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public Blob getPhoto() {
-        return photo;
-    }
 
-    public void setPhoto(Blob photo) {
-        this.photo = photo;
-    }
 
     @Override
     public String toString() {
@@ -125,7 +112,6 @@ public class User implements Serializable {
                 ", fullName='" + fullName + '\'' +
                 ", state='" + state + '\'' +
                 ", role=" + role +
-                ", photo=" + photo +
                 '}';
     }
 }

@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebFilter({"/index.jsp", "/registro/*", "/caja/*", "/configuracion/*",
+@WebFilter({"/index.jsp", "/users.jsp", "/registro/*", "/caja/*", "/configuracion/*",
         "/reportes/*", "/roles/*", "/usuarios/*"})
 public class LoginFilter implements Filter {
 
