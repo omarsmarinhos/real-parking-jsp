@@ -1,8 +1,7 @@
 package com.RealParking.persitence.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
-import java.sql.Blob;
 
 @Entity
 @Table(name = "usuarios")
@@ -28,29 +27,33 @@ public class User implements Serializable {
     private String state;
 
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_rol")
     private Role role;
 
+    @Column(name = "url_foto")
+    private String url;
 
     public User() {
     }
 
-    public User(Integer idUser, String username, String password, String fullName, String state, Role role) {
+    public User(Integer idUser, String username, String password, String fullName, String state, Role role, String url) {
         this.idUser = idUser;
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.state = state;
         this.role = role;
+        this.url = url;
     }
 
-    public User(String username, String password, String fullName, String state, Role role) {
+    public User(String username, String password, String fullName, String state, Role role, String url) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.state = state;
         this.role = role;
+        this.url = url;
     }
 
     public Integer getIdUser() {
@@ -101,7 +104,13 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public String getUrl() {
+        return url;
+    }
 
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     @Override
     public String toString() {
@@ -112,6 +121,7 @@ public class User implements Serializable {
                 ", fullName='" + fullName + '\'' +
                 ", state='" + state + '\'' +
                 ", role=" + role +
+                ", url=" + url +
                 '}';
     }
 }

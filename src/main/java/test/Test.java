@@ -1,17 +1,8 @@
 package test;
 
 
-import com.RealParking.persitence.entity.Incident;
-import com.RealParking.persitence.entity.Role;
-import com.RealParking.persitence.entity.Ticket;
-import com.RealParking.persitence.entity.User;
-import com.RealParking.persitence.service.*;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import com.RealParking.service.UserService;
+import com.RealParking.service.UserServiceImpl;
 
 
 public class Test {
@@ -20,13 +11,12 @@ public class Test {
 
         /*MenuService service = new MenuServiceImpl();
         String rol = "Cajero";
-        String url = "http://localhost:8080/RealParkingJsp/usuarios";
-        List<String> menus = Arrays.asList("Caja", "Reportes");
+        //String url = "http://localhost:8080/RealParkingJsp/usuarios";
 
-        Optional<String> menuActual = menus.stream()
-                .filter(m -> url.contains(m.toLowerCase())).findAny();*/
+        List<Permiso> permisoList = service.findAllMenus(rol);
+        permisoList.forEach(System.out::println);*/
 
-        String username = "";
+        /*String username = "";
         String nombre = "";
         String rol = "1";
         String estado = "";
@@ -36,10 +26,11 @@ public class Test {
 
         List<User> usuarios = userService
                 .findAllUsers(0, 4, username, nombre, rol, estado);
-        usuarios.forEach(System.out::println);
+        usuarios.forEach(System.out::println);*/
 
 
-
+        UserService userService = new UserServiceImpl();
+        System.out.println(userService.porUsername("71397835"));
 
     }
 

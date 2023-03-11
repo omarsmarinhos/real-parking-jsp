@@ -1,11 +1,10 @@
 package com.RealParking.controller;
 
+import com.RealParking.configs.UserServicePrinc;
 import com.RealParking.persitence.entity.User;
-import com.RealParking.persitence.service.RoleService;
-import com.RealParking.persitence.service.RoleServiceImpl;
-import com.RealParking.persitence.service.UserService;
-import com.RealParking.persitence.service.UserServiceImpl;
+import com.RealParking.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,23 +12,27 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Optional;
 
 @WebServlet("/usuarios/get")
 public class UserGetServlet extends HttpServlet {
 
+    @Inject
+    @UserServicePrinc
+    private UserService userService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService userService = new UserServiceImpl();
         if (req.getParameter("id") != null) {
             Integer idUser = Integer.valueOf(req.getParameter("id"));
-            User usuario = new User();
-            usuario.setIdUser(idUser);
-            usuario = userService.findUserById(usuario);
+            Optional<User> usuario = userService.porId(idUser);
             ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(usuario);
-            resp.setContentType("application/json");
-            resp.getWriter().write(json);
-        };
+            if (usuario.isPresent()) {
+                String json = mapper.writeValueAsString(usuario.get());
+                resp.setContentType("application/json");
+                resp.getWriter().write(json);
+            }
+        }
+        ;
     }
 }

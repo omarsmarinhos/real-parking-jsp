@@ -1,11 +1,9 @@
 package com.RealParking.controller;
 
-import com.RealParking.persitence.entity.Role;
+import com.RealParking.configs.UserServicePrinc;
 import com.RealParking.persitence.entity.User;
-import com.RealParking.persitence.service.RoleService;
-import com.RealParking.persitence.service.RoleServiceImpl;
-import com.RealParking.persitence.service.UserService;
-import com.RealParking.persitence.service.UserServiceImpl;
+import com.RealParking.service.UserService;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,30 +11,38 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet("/usuarios/deshabilitar")
 public class UserDeshabilitarServlet extends HttpServlet {
 
+    @Inject
+    @UserServicePrinc
+    private UserService userService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id;
+        Integer id;
         User user = null;
         try {
             id = Integer.parseInt(req.getParameter("id"));
             user = new User();
             user.setIdUser(id);
         } catch (NumberFormatException e) {
+            id = null;
             resp.sendRedirect(req.getContextPath() + "/usuarios");
         }
 
-        UserService userService = new UserServiceImpl();
-        user = userService.findUserById(user);
-        if (user.getState().equals("Activo")) {
-            user.setState("Inactivo");
-        } else {
-            user.setState("Activo");
+        Optional<User> userOptional = userService.porId(id);
+        if (userOptional.isPresent()) {
+            user = userOptional.get();
+            if (user.getState().equals("Activo")) {
+                user.setState("Inactivo");
+            } else {
+                user.setState("Activo");
+            }
         }
-        userService.updateUser(user);
+        userService.guardar(user);
         resp.sendRedirect(req.getContextPath() + "/usuarios");
     }
 }

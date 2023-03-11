@@ -1,10 +1,5 @@
 package com.RealParking.filters;
 
-import com.RealParking.persitence.entity.User;
-import com.RealParking.persitence.service.LoginService;
-import com.RealParking.persitence.service.MenuService;
-import com.RealParking.persitence.service.MenuServiceImpl;
-import jakarta.jms.Session;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;

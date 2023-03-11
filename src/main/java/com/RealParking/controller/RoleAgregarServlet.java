@@ -1,8 +1,10 @@
 package com.RealParking.controller;
 
+import com.RealParking.configs.RoleServicePrinc;
 import com.RealParking.persitence.entity.Role;
-import com.RealParking.persitence.service.RoleService;
-import com.RealParking.persitence.service.RoleServiceImpl;
+import com.RealParking.service.RoleService;
+import com.RealParking.service.RoleServiceImpl;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +15,10 @@ import java.io.IOException;
 
 @WebServlet("/roles/agregar")
 public class RoleAgregarServlet extends HttpServlet {
+
+    @Inject
+    @RoleServicePrinc
+    private RoleService service;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,8 +32,8 @@ public class RoleAgregarServlet extends HttpServlet {
             rol.setDescription(role);
             rol.setState(estado);
 
-            RoleService service = new RoleServiceImpl();
-            service.insertRole(rol);
+            //aun falta modificar
+            service.guardar(rol);
             resp.sendRedirect(req.getContextPath() + "/roles");
         }
     }

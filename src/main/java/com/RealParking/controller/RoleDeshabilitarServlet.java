@@ -1,8 +1,10 @@
 package com.RealParking.controller;
 
+import com.RealParking.configs.RoleServicePrinc;
 import com.RealParking.persitence.entity.Role;
-import com.RealParking.persitence.service.RoleService;
-import com.RealParking.persitence.service.RoleServiceImpl;
+import com.RealParking.service.RoleService;
+import com.RealParking.service.RoleServiceImpl;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +15,11 @@ import java.io.IOException;
 
 @WebServlet("/roles/deshabilitar")
 public class RoleDeshabilitarServlet extends HttpServlet {
+
+    @Inject
+    @RoleServicePrinc
+    private RoleService service;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id;
@@ -25,14 +32,13 @@ public class RoleDeshabilitarServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/roles");
         }
 
-        RoleService roleService = new RoleServiceImpl();
-        rol = roleService.findRoleById(rol);
+        //rol = roleService.findRoleById(rol);
         if (rol.getState().equals("Activo")) {
             rol.setState("Inactivo");
         } else {
             rol.setState("Activo");
         }
-        roleService.updateRole(rol);
+        //roleService.updateRole(rol);
         resp.sendRedirect(req.getContextPath() + "/roles");
     }
 }

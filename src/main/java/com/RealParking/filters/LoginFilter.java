@@ -1,7 +1,7 @@
 package com.RealParking.filters;
 
-import com.RealParking.persitence.service.LoginService;
-import com.RealParking.persitence.service.LoginServiceImpl;
+import com.RealParking.service.LoginService;
+import com.RealParking.service.LoginServiceImpl;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;

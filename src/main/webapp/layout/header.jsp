@@ -20,7 +20,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page"
-                       href="${pageContext.request.contextPath}/index.jsp">Home</a>
+                       href="${pageContext.request.contextPath}/login">Home</a>
                 </li>
                 <c:forEach items="${sessionScope.menus}" var="m">
                     <li class="nav-item">

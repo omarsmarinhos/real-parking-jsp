@@ -1,7 +1,7 @@
 package com.RealParking.controller;
 
-import com.RealParking.persitence.service.LoginService;
-import com.RealParking.persitence.service.LoginServiceImpl;
+import com.RealParking.service.LoginService;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,10 +14,13 @@ import java.util.Optional;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet  {
+
+    @Inject
+    private LoginService loginService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LoginService service = new LoginServiceImpl();
-        Optional<String> username = service.getUsername(req);
+        Optional<String> username = loginService.getUsername(req);
         if (username.isPresent()) {
             HttpSession session = req.getSession();
             session.invalidate();
