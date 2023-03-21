@@ -1,11 +1,11 @@
 package com.RealParking.persitence.repositories;
 
-import com.RealParking.domain.Permiso;
+import com.RealParking.domain.Menu;
 
-import java.util.List;
+import java.util.Map;
 
 public interface MenuRepository {
 
-    List<Permiso> listarMenus(String rol);
+    Map<String, Menu> listarMenus(String rol);
 
 }

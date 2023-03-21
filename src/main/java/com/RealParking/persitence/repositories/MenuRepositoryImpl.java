@@ -2,7 +2,7 @@ package com.RealParking.persitence.repositories;
 
 import com.RealParking.configs.MysqlConn;
 import com.RealParking.configs.Repository;
-import com.RealParking.domain.Permiso;
+import com.RealParking.domain.Menu;
 import jakarta.inject.Inject;
 
 import java.sql.Connection;
@@ -10,7 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @RepositoryJdbc
@@ -21,27 +23,26 @@ public class MenuRepositoryImpl implements MenuRepository{
     private Connection conn;
 
     @Override
-    public List<Permiso> listarMenus(String rol) {
-        List<Permiso> menusPermisos = new ArrayList<>();
-        String sql = "SELECT mi.menu_item as menu, p.permiso " +
-                "FROM rol as r inner join rol_menu_items as rmi on r.id_rol = rmi.id_rol " +
-                "inner join menu_items as mi on rmi.id_menu_item = mi.id " +
-                "inner join rol_menu_iems_permisos as rmip on rmip.id_rol_menu_items = rmi.id " +
-                "inner join permisos as p on p.id = rmip.id_permiso " +
+    public Map<String, Menu> listarMenus(String rol) {
+        Map<String, Menu> menuMap = new HashMap<>();
+        String sql = "select m.nombre_menu, m.url, pm.nivel_permiso " +
+                "from permisos_menus as pm inner join menus as m on pm.id_menu = m.id_menu " +
+                "inner join rol as r on pm.id_rol = r.id_rol " +
                 "where r.descripcion ='" + rol + "'";
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Permiso permiso = new Permiso();
-                permiso.setMenu(rs.getString(1));
-                permiso.setPermiso(rs.getString(2));
-                menusPermisos.add(permiso);
+                Menu menuPermiso = new Menu();
+                String nombreMenu = rs.getString("nombre_menu");
+                menuPermiso.setUrl(rs.getString("url"));
+                menuPermiso.setNivelPermiso(rs.getInt("nivel_permiso"));
+                menuMap.put(nombreMenu, menuPermiso);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return menusPermisos;
+        return menuMap;
     }
 }

@@ -2,10 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="layout/header.jsp"/>
 <h3 class="my-4">Listado de usuarios</h3>
-<%
-    boolean editar = false;
-    boolean eliminar = false;
-%>
+<c:set var="menu" value="${sessionScope.menus['Usuarios']}"/>
 <div class="row mb-2">
     <label class="col-form-label col-sm-2" for="username">DNI</label>
     <div class="col-sm-4">
@@ -13,23 +10,16 @@
     </div>
     <div class="col-sm-2">
         <button class="btn btn-secondary" onclick="updateTable(1)">Filtrar</button>
+        <a id="pdf" href="#"><img width="30" src="images/pdf_icon.svg"></a>
+        <a id="excel" href="#"><img width="30" src="images/excel_icon.svg"></a>
     </div>
-    <c:forEach items="${sessionScope.permisos}" var="m">
-        <c:if test="${m.menu.equals('Usuarios') && m.permiso.equals('Crear')}">
-            <div class="col-sm-2">
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/usuarios/guardar">
-                    Agregar Usuario
-                </a>
-            </div>
-        </c:if>
-        <c:if test="${m.menu.equals('Usuarios') && m.permiso.equals('Editar')}">
-            <%editar = true;%>
-        </c:if>
-        <c:if test="${m.menu.equals('Usuarios') && m.permiso.equals('Eliminar')}">
-            <%eliminar = true;%>
-        </c:if>
-    </c:forEach>
-
+    <c:if test="${not empty menu and menu.nivelPermiso >= 3}">
+        <div class="col-sm-2">
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/usuarios/guardar">
+                Agregar Usuario
+            </a>
+        </div>
+    </c:if>
 </div>
 <a class="link-primary" style="cursor: pointer;" id="mas-filtros" onclick="mostrarFiltros()">Mostrar más filtros</a>
 <div id="filtros">
@@ -87,8 +77,7 @@
 <script>
     let paginaActual
     let numDePaginas
-    let editar = <%=editar%>;
-    let eliminar = <%=eliminar%>;
+    let nivelPermiso = ${menu.nivelPermiso};
     updateTable(1);
     ocultarFiltros()
 
@@ -103,10 +92,19 @@
         let url = "${pageContext.request.contextPath}/usuarios/listar?page=" + page;
         let urlFoto = "http://localhost:8080/fotos/";
 
-        url += dni ? "&username=" + dni : "";
-        url += nombreCompleto ? "&nombre_completo=" + nombreCompleto : "";
-        url += rol ? "&id_rol=" + rol : "";
-        url += estado ? "&estado_usuario=" + estado : "";
+        let filtros = dni ? "&username=" + dni : "";
+        filtros += nombreCompleto ? "&nombre_completo=" + nombreCompleto : "";
+        filtros += rol ? "&id_rol=" + rol : "";
+        filtros += estado ? "&estado_usuario=" + estado : "";
+
+        url += filtros;
+
+        const linkPdf = document.getElementById('pdf')
+        const linkExcel = document.getElementById('excel')
+        linkPdf.href = "${pageContext.request.contextPath}/reportes?reporte=pdf&page=" + page;
+        linkPdf.href += filtros
+        linkExcel.href = "${pageContext.request.contextPath}/reportes?reporte=excel&page=" + page;
+        linkExcel.href += filtros
 
 
         $(document).ready(function () {
@@ -133,7 +131,7 @@
                             "<td>" + user.role.description + "</td>" +
                             "<td>" + user.state + "</td>";
 
-                        if (editar) {
+                        if (nivelPermiso >= 2) {
                             fila += "<td>" +
                                 "<a class='btn btn-sm btn-success' " +
                                 "href='${pageContext.request.contextPath}/usuarios/guardar?id=" + user.idUser + "' >" +
@@ -141,13 +139,13 @@
                                 "</a>" +
                                 "</td>";
                         }
-                        if (eliminar) {
+                        if (nivelPermiso >= 3) {
                             fila += "<td>" +
-                            "<a class='btn btn-sm btn-" + (user.state === "Activo" ? "danger" : "outline-danger") + "' " +
-                            "href='${pageContext.request.contextPath}/usuarios/deshabilitar?id=" + user.idUser + "' >" +
-                            (user.state === "Activo" ? "Deshabilitar" : "Habilitar&nbsp;&nbsp;&nbsp;&nbsp;") +
-                            "</a>" +
-                            "</td>";
+                                "<a class='btn btn-sm btn-" + (user.state === "Activo" ? "danger" : "outline-danger") + "' " +
+                                "href='${pageContext.request.contextPath}/usuarios/deshabilitar?id=" + user.idUser + "' >" +
+                                (user.state === "Activo" ? "Deshabilitar" : "Habilitar&nbsp;&nbsp;&nbsp;&nbsp;") +
+                                "</a>" +
+                                "</td>";
                         }
 
                         fila += "</tr>";

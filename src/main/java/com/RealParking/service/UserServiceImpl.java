@@ -6,7 +6,6 @@ import com.RealParking.interceptors.TransactionalJpa;
 import com.RealParking.persitence.entity.User;
 
 import com.RealParking.persitence.repositories.RepositoryJpa;
-import com.RealParking.persitence.repositories.RoleRepository;
 import com.RealParking.persitence.repositories.UserRepository;
 import jakarta.inject.Inject;
 
@@ -42,6 +41,7 @@ public class UserServiceImpl implements UserService {
     public Optional<User> porId(Integer id) {
         return userRepository.findUserById(id);
     }
+
 
     @Override
     public void guardar(User user) {

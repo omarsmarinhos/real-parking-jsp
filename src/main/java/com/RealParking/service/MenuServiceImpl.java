@@ -1,12 +1,12 @@
 package com.RealParking.service;
 
-import com.RealParking.domain.Permiso;
+import com.RealParking.domain.Menu;
 import com.RealParking.persitence.repositories.MenuRepository;
 import com.RealParking.persitence.repositories.RepositoryJdbc;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import java.util.List;
+import java.util.Map;
 
 @ApplicationScoped
 public class MenuServiceImpl implements MenuService{
@@ -17,7 +17,7 @@ public class MenuServiceImpl implements MenuService{
 
 
     @Override
-    public List<Permiso> listarMenus(String rol) {
+    public Map<String, Menu> listarMenus(String rol) {
         return menuRepository.listarMenus(rol);
     }
 

@@ -62,7 +62,7 @@
     <div class="row mb-2">
         <label class="col-form-label col-sm-2" for="file">Foto</label>
         <div class="col-sm-8">
-            <input class="form-control" type="file" name="file" id="file" value="http://localhost:8080/fotos/user.png">
+            <input class="form-control" type="file" name="file" id="file">
         </div>
     </div>
     <div class="row mb-2">
@@ -73,7 +73,9 @@
     </div>
     <input class="form-control" type="hidden" name="file_name" id="file_name"
            value="${requestScope.user.url}">
+    <input type="hidden" name="idUser" id="idUser" value="${requestScope.user.idUser}">
     </div>
+
 </form>
 <jsp:include page="layout/footer.jsp"/>
 

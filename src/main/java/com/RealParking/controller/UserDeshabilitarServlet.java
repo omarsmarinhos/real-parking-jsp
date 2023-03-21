@@ -1,7 +1,9 @@
 package com.RealParking.controller;
 
 import com.RealParking.configs.UserServicePrinc;
+import com.RealParking.domain.Menu;
 import com.RealParking.persitence.entity.User;
+import com.RealParking.service.PermisosException;
 import com.RealParking.service.UserService;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -11,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 @WebServlet("/usuarios/deshabilitar")
@@ -22,6 +25,13 @@ public class UserDeshabilitarServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int nivelPermiso = ((Map<String, Menu>) req.getSession().getAttribute("menus"))
+                .get("Usuarios").getNivelPermiso();
+
+        if (nivelPermiso < 3) {
+            throw new PermisosException("Permiso denegado");
+        }
+
         Integer id;
         User user = null;
         try {

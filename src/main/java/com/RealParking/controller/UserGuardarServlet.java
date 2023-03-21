@@ -2,11 +2,10 @@ package com.RealParking.controller;
 
 import com.RealParking.configs.RoleServicePrinc;
 import com.RealParking.configs.UserServicePrinc;
+import com.RealParking.domain.Menu;
 import com.RealParking.persitence.entity.Role;
 import com.RealParking.persitence.entity.User;
-import com.RealParking.service.RoleService;
-import com.RealParking.service.RoleServiceImpl;
-import com.RealParking.service.UserService;
+import com.RealParking.service.*;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,8 +37,18 @@ public class UserGuardarServlet extends HttpServlet {
     @RoleServicePrinc
     private RoleService roleService;
 
+    private int nivelPermiso;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        nivelPermiso = ((Map<String, Menu>) req.getSession().getAttribute("menus"))
+                .get("Usuarios").getNivelPermiso();
+
+        if (nivelPermiso < 2) {
+            throw new PermisosException("Permiso denegado!");
+        }
+
         Integer id;
         try {
             id = Integer.valueOf(req.getParameter("id"));
@@ -50,9 +59,13 @@ public class UserGuardarServlet extends HttpServlet {
         Role role = new Role();
         user.setRole(role);
         if (id != null) {
-            Optional<User> userOptional = service.porId(id);
-            if (userOptional.isPresent()) {
-                user = userOptional.get();
+            if (nivelPermiso >= 2) {
+                Optional<User> userOptional = service.porId(id);
+                if (userOptional.isPresent()) {
+                    user = userOptional.get();
+                }
+            } else {
+                throw new PermisosException("Usted no cuenta con los permisos para acceder a esta información.");
             }
         }
         req.setAttribute("roles", roleService.listar());
@@ -127,7 +140,15 @@ public class UserGuardarServlet extends HttpServlet {
                 user.setUrl(fileName);
             }
 
-            service.guardar(user);
+            if (idUser == null && nivelPermiso >= 3) {
+                //guarda
+                service.guardar(user);
+            } else if (idUser != null && nivelPermiso >= 2) {
+                //edita
+                service.guardar(user);
+            } else {
+                throw new PermisosException("Permiso denegado!");
+            }
 
             if (filePart != null && filePart.getSize() > 0) {
                 String rutaDirectorio = req.getContextPath() + "/fotos/" + user.getIdUser() + "/";
@@ -139,7 +160,6 @@ public class UserGuardarServlet extends HttpServlet {
 
                 if (fileName != null && !fileName.isEmpty()) {
                     String rutaArchivo = rutaDirectorio + fileName;
-                    log.info("||||||||||||||||||||||" + rutaArchivo + "||||||||||||||||||||||||||");
                     File target = new File(rutaArchivo);
                     try (InputStream input = filePart.getInputStream()) {
                         FileUtils.copyInputStreamToFile(input, target);

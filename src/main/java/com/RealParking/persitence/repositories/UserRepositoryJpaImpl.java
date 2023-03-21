@@ -1,6 +1,7 @@
 package com.RealParking.persitence.repositories;
 
 import com.RealParking.configs.Repository;
+import com.RealParking.controller.UserGuardarServlet;
 import com.RealParking.persitence.entity.User;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -8,6 +9,7 @@ import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Repository
 @RepositoryJpa

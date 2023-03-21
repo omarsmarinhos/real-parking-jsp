@@ -13,6 +13,6 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect(req.getContextPath() + "/users.jsp");
+        req.getRequestDispatcher("/users.jsp").forward(req, resp);
     }
 }

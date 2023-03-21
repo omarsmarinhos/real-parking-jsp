@@ -25,7 +25,7 @@
                 <c:forEach items="${sessionScope.menus}" var="m">
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="${pageContext.request.contextPath}/${m.toLowerCase()}">${m}</a>
+                           href="${pageContext.request.contextPath}${m.value.url}">${m.key}</a>
                     </li>
                 </c:forEach>
 
